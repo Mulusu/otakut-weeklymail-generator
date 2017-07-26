@@ -33,3 +33,5 @@ class Mailgen():
         text+="There might be other spontaneous program mid-week.\n"
         text+="Follow our calendar to see if there are any changes or sudden additions to the week's program.\n"
         print(text)
+        file = open("mailbody.txt", 'w')
+        file.write(text)
