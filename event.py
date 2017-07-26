@@ -1,7 +1,13 @@
-class Event():
-    starttime = ""
-    endtime = ""
+class Date():
+    year = ""
+    month = ""
     day = ""
-    date = ""
+    dow = ""
+    hour = ""
+    minute = ""
+
+class Event():
+    start = Date()
+    end = Date()
     topic = ""
     description = ""

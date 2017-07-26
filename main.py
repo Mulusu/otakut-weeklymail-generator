@@ -4,7 +4,7 @@ from parser import Parser
 from mailgen import Mailgen
 
 filename = "basic.ics"
-daylight = True		# Set false if/when daylight savings is not in use
+gmtoffset = 3	# REMEBER TO ADJUST BASED ON DAYLIGHT SAVINGS
 
 def mailgen():
     return
@@ -16,7 +16,7 @@ def main():
         exit(0)
     print("Retrieved file succesfully")
     parser = Parser()
-    parser.parse(filename)
+    parser.parse(filename,gmtoffset)
     mailgen = Mailgen(parser.events)
     mailgen.generate()
     os.remove(filename)
