@@ -42,7 +42,8 @@ class Parser():
             elif(line[0].strip() == "END" and line[1].strip() == "VEVENT"):
                 eweeknum = datetime(int(event.start.year),int(event.start.month),int(event.start.day)).strftime("%U")
                 if(eweeknum == weeknum and year == event.start.year):
-                    self.events.append(event)
+                     self.events = [event] + self.events
+#                    self.events.append(event)
             else:
                 pass
             line = data.readline().split(":",1)

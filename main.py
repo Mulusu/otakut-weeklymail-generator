@@ -17,7 +17,7 @@ def main():
     print("Retrieved file succesfully")
     parser = Parser()
     parser.parse(filename,gmtoffset)
-    mailgen = Mailgen(parser.events)
+    mailgen = Mailgen(parser.events,parser.reservations)
     mailgen.generate()
     os.remove(filename)
     print("Generation complete! Total number of events is "+str(len(parser.events)))
