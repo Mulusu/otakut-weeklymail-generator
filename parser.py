@@ -43,7 +43,10 @@ class Parser():
                 eweeknum = datetime(int(event.start.year),int(event.start.month),int(event.start.day)).strftime("%U")
                 if(eweeknum == weeknum and year == event.start.year):
                      self.events = [event] + self.events
-#                    self.events.append(event)
             else:
                 pass
             line = data.readline().split(":",1)
+        for e in self.events:
+            if("reserved" in e.topic.lower() or "reservation" in e.topic.lower()):
+                self.reservations.append(e)
+                self.events.remove(e)

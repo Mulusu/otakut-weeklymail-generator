@@ -20,5 +20,4 @@ def main():
     mailgen = Mailgen(parser.events,parser.reservations)
     mailgen.generate()
     os.remove(filename)
-    print("Generation complete! Total number of events is "+str(len(parser.events)))
 main()

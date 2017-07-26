@@ -5,7 +5,7 @@ month = ["January","February","March","April","May","June","July","August","Sept
 class Mailgen():
     def __init__(self,eventlist,reservationlist):
         self.events = eventlist
-        self.reservation = reservationlist
+        self.reservations = reservationlist
 
     def generate(self):
         weeknum = str(datetime.now().strftime('%U'))
@@ -14,7 +14,13 @@ class Mailgen():
         text+="***********************************************\n\n"
         text+="****** THIS WEEK'S PROGRAM *******\n\n"
         text+="Clubroom reservations:\n=#=#=#=#=#=#=#=#=\n"
-        text+="None\n\n"
+        if(len(self.reservations) == 0):
+            text+="None\n\n"
+        else:
+            for e in self.reservations:
+                text+=e.start.dow+", "+month[int(e.start.month)-1]+" "+e.start.day+", "
+                text+=e.start.hour+":"+e.start.minute+" - "+e.end.hour+":"+e.end.minute+"\n"
+                text+=e.topic+"\n\n"
         text+="Upcoming events:\n=#=#=#=#=#=#=#=\n\n"
         for e in self.events:
             text+=e.start.dow+", "+month[int(e.start.month)-1]+" "+e.start.day+", "
