@@ -11,7 +11,9 @@ class Parser():
         '''
         This parses the calendar ics data and creates the appropriate events to events list
         '''
-        day,month,year,weeknum = datetime.now().strftime('%d %m %Y %U').split(' ')
+        day,month,year,weeknum = datetime.now().strftime('%d %m %Y %W').split(' ')
+        if(datetime.now().weekday() == 6):
+            weeknum += 1
         data = open(filename)
         line = data.readline().split(":",1)
         event = Event()
@@ -40,9 +42,10 @@ class Parser():
             elif(line[0].strip() == "SUMMARY"):
                 event.topic = line[1]
             elif(line[0].strip() == "END" and line[1].strip() == "VEVENT"):
-                eweeknum = datetime(int(event.start.year),int(event.start.month),int(event.start.day)).strftime("%U")
+                eweeknum = datetime(int(event.start.year),int(event.start.month),int(event.start.day)).strftime("%W")
                 if(eweeknum == weeknum and year == event.start.year):
-                     self.events = [event] + self.events
+                     self.events.append(event)
+#                     self.events = [event] + self.events
             else:
                 pass
             line = data.readline().split(":",1)
