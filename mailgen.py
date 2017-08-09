@@ -33,7 +33,7 @@ class Mailgen():
         text+="There might be other spontaneous program mid-week.\n"
         text+="Follow our calendar to see if there are any changes or sudden additions to the week's program.\n"
         text+="Unless otherwise mentioned, all events will be held in the Jämeräntaival 10CD Clubroom that we maintain.\n"
-        text+="https://otakut.ayy.fi"
+        text+="Changed to membership information and mailing list subscription can be done here: https://otakut.ayy.fi/wiki.php/Otakut/Jasenlomake"
 
         print(text)
         file = open("mailbody.txt", 'w')
