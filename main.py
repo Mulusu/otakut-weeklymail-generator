@@ -1,7 +1,7 @@
 import os
 import urllib.request
 from parser import Parser
-from mailgen import Mailgen
+from generator import Mailgen
 
 filename = "basic.ics"
 gmtoffset = 3	# REMEBER TO ADJUST BASED ON DAYLIGHT SAVINGS
