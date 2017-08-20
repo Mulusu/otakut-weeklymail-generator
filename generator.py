@@ -20,13 +20,16 @@ class Mailgen():
                 text+=e.end.strftime("%H:%M\n")
                 text+=e.topic+"\n\n"
         text+="Upcoming events:\n=#=#=#=#=#=#=#=\n\n"
-        for e in self.events:
-            text+=e.start.strftime("%a, %B %d, %H:%M - ")
-            text+=e.end.strftime("%H:%M\n")
-            text+=e.topic
-            text+="~~~~~~\n"
-            desc = e.description.replace("\n ","").replace("\\n","\n").replace("\\","")
-            text+= desc + "\n\n\n"
+        if(len(self.events) == 0):
+            text+="None\n\n"
+        else:
+            for e in self.events:
+                text+=e.start.strftime("%a, %B %d, %H:%M - ")
+                text+=e.end.strftime("%H:%M\n")
+                text+=e.topic
+                text+="~~~~~~\n"
+                desc = e.description.replace("\n ","").replace("\\n","\n").replace("\\","")
+                text+= desc + "\n\n\n"
         text+="=#=#=#=#=#=#=#=#=#=#=\n"
         text+="There might be other spontaneous program mid-week.\n"
         text+="Follow our calendar to see if there are any changes or sudden additions to the week's program.\n"

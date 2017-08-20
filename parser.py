@@ -18,7 +18,7 @@ class Parser():
         '''
         day,month,year,weeknum = datetime.now().strftime('%d %m %Y %W').split(' ')
         if(datetime.now().weekday() == 6): # On sundays we want to create NEXT week's mail, not the current one's
-            weeknum += 1
+            weeknum = str(int(weeknum) + 1)
         data = open(filename)
         line = data.readline().split(":",1)
         event = Event()
