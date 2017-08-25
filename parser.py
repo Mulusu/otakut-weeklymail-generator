@@ -30,7 +30,6 @@ class Parser():
             elif(line[0].strip() == "DTSTART" or line[0].strip() == "DTEND"):
                 kala = line[0]
                 date = datetime(int(line[1][0:4]),int(line[1][4:6]),int(line[1][6:8]),(int(line[1][9:11])+gmtoffset)%24,int(line[1][11:13]))
-                print(date)
                 if(kala == "DTSTART"):
                     event.start = date
                 else:
@@ -66,5 +65,3 @@ class Parser():
                 self.reservations.append(e)
                 self.events.remove(e)
 
-        print(len(self.reservations))
-        print(len(self.events))
