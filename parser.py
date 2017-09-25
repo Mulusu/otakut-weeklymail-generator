@@ -61,7 +61,7 @@ class Parser():
 
         # Separate reservations from club's events
         for e in self.events:
-            if("reserved" in e.topic.lower() or "reservation" in e.topic.lower()):
+            if("reserved" in e.topic.lower() or "reservation" in e.topic.lower() or "reservation:" in e.topic.lower()):
                 self.reservations.append(e)
                 self.events.remove(e)
 
