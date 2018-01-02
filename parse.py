@@ -12,7 +12,7 @@ def parse(filename,gmtoffset):
     '''
     events = []
     reservations = []
-    year,weeknum = datetime.now().strftime('%Y %U').split(' ')
+    year,weeknum = datetime.now().strftime('%Y %W').split(' ')
     data = open(filename)
     line = data.readline().split(":",1)
     event = Event()

@@ -3,7 +3,7 @@
 from datetime import datetime
 
 def generate(events,reservations):
-    weeknum = str(datetime.now().strftime('%U'))
+    weeknum = str(datetime.now().strftime('%W'))
     text = "***********************************************\n"
     text+="*** Otakut weekly newsletter, week " + weeknum + " ***\n"
     text+="***********************************************\n\n"
