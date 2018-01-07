@@ -12,7 +12,8 @@ webscript = 0 # 1 if this file is being used as a script on web server
 filename = "basic.ics"
 writefile = "weeklymail.txt"
 year,weeknum = datetime.now().strftime('%Y %W').split(' ')
-gmtoffset = int(time.localtime().tm_gmtoff / 3600)
+if(datetime.today().weekday() == 6):
+    weeknum = str(int(weeknum)+1)
 
 class Event():
     start = datetime(1980,1,1,1,1)
@@ -24,12 +25,15 @@ class Event():
 def printe(string='', encoding='utf8'):
     sys.stdout.buffer.write(string.encode(encoding) + b'\n')
 
-def parse():
+def parse(filename,gmtoffset):
     '''
     This parses the calendar ics data and creates the appropriate events to events list
     '''
     events = []
     reservations = []
+#    year,weeknum = datetime.now().strftime('%Y %W').split(' ')
+#    if(datetime.today().weekday() == 6):
+#        weeknum = str(int(weeknum)+1)
     data = open(filename,'r',encoding="utf-8")
     line = data.readline().split(":",1)
     event = Event()
@@ -83,6 +87,7 @@ def parse():
     return returnable
 
 def generate(events,reservations):
+#    weeknum = str(datetime.now().strftime('%W'))
     text = "***********************************************\n"
     text+="*** Otakut weekly newsletter, week " + weeknum + " ***\n"
     text+="***********************************************\n\n"
@@ -113,7 +118,6 @@ def generate(events,reservations):
     text+="Changes to membership information and mailing list subscription can be done here: https://otakut.ayy.fi/wiki.php/Otakut/Jasenlomake"
     return text
 
-# Print for web server
 def web(text):
     printe("Content-Type: text/plain; charset=utf-8")
     printe()
@@ -127,9 +131,12 @@ def main():
         printe("Something went wrong retrieving the calendar data!")
         exit(0)
 
+    # The offset of GMT, obtained from computer's local clock
+    gmtoffset = int(time.localtime().tm_gmtoff / 3600)
+
     # parse events and reservations from calendar
     try:
-        data = parse()
+        data = parse(filename,gmtoffset)
 
         # Generate the mail's text
         try:
@@ -139,9 +146,10 @@ def main():
     except:
         text = "Failed to parse calendar data!"
     if webscript:
+        # Generate the web page
         web(text)
     else:
-        text.encode('utf-8')
+        #write mail to file and print it
         print(text)
         filu = open(writefile,'w')
         filu.write(text)
