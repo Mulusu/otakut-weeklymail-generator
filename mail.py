@@ -12,8 +12,11 @@ webscript = 0 # 1 if this file is being used as a script on web server
 filename = "basic.ics"
 writefile = "weeklymail.txt"
 year,weeknum = datetime.now().strftime('%Y %W').split(' ')
+
 if(datetime.today().weekday() == 6):
     weeknum = str(int(weeknum)+1)
+    if(int(weeknum) < 10):
+        weeknum = str(0)+weeknum
 
 class Event():
     start = datetime(1980,1,1,1,1)
