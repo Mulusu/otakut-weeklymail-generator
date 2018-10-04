@@ -8,7 +8,7 @@ import urllib.request
 import time
 from datetime import datetime
 
-webscript = 0 # 1 if this file is being used as a script on web server
+webscript = 1 # 1 if this file is being used as a script on web server
 filename = "basic.ics"
 writefile = "weeklymail.txt"
 year,weeknum = datetime.now().strftime('%Y %W').split(' ')
@@ -34,9 +34,6 @@ def parse(filename,gmtoffset):
     '''
     events = []
     reservations = []
-#    year,weeknum = datetime.now().strftime('%Y %W').split(' ')
-#    if(datetime.today().weekday() == 6):
-#        weeknum = str(int(weeknum)+1)
     data = open(filename,'r',encoding="utf-8")
     line = data.readline().split(":",1)
     event = Event()
@@ -78,8 +75,9 @@ def parse(filename,gmtoffset):
     events.sort(key=lambda event:event.start)
 
     # Separate reservations from club's events
-    for e in events:
-        txt = e.topic.lower()
+    err = events
+    for e in err:
+        txt = e.topic.lower().strip()
         if("reserved" in txt or "reservation" in txt):
             reservations.append(e)
             events.remove(e)
@@ -122,9 +120,11 @@ def generate(events,reservations):
     return text
 
 def web(text):
-    printe("Content-Type: text/plain; charset=utf-8")
+    printe("Content-Type: text/html; charset=utf-8")
     printe()
+    printe("<p>")
     printe(text)
+    printe("</p>")
 
 def main():
     data = urllib.request.urlretrieve("https://calendar.google.com/calendar/ical/otakukalenteri%40gmail.com/public/basic.ics", filename)
@@ -144,6 +144,7 @@ def main():
         # Generate the mail's text
         try:
             text = generate(data[0],data[1])
+            text = text.replace('\n','<br/>')
         except:
             text = "Failed to generate mail."
     except:
