@@ -76,7 +76,7 @@ def parse(filename,gmtoffset):
     events.sort(key=lambda event:event.start)
 
     # Separate reservations from club's events
-    err = events
+    err = events.copy()
     for e in err:
         txt = e.topic.lower().strip()
         if("reserved" in txt or "reservation" in txt):
