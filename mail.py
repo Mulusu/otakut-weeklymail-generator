@@ -13,6 +13,7 @@ filename = "basic.ics"
 writefile = "weeklymail.txt"
 year,weeknum = datetime.now().strftime('%Y %W').split(' ')
 
+# If Sunday, generate next week's mail
 if(datetime.today().weekday() == 6):
     weeknum = str(int(weeknum)+1)
     if(int(weeknum) < 10):
@@ -88,9 +89,13 @@ def parse(filename,gmtoffset):
     return returnable
 
 def generate(events,reservations):
-#    weeknum = str(datetime.now().strftime('%W'))
+    weeknum = int(str(datetime.now().strftime('%W')))+1
+    if datetime.today().weekday() == 6:
+        weeknum = weeknum+1
+    if weeknum < 10:
+        weeknum = "0"+str(weeknum)
     text = "***********************************************\n"
-    text+="*** Otakut weekly newsletter, week " + weeknum + " ***\n"
+    text+="*** Otakut weekly newsletter, week " + str(weeknum) + " ***\n"
     text+="***********************************************\n\n"
     text+="****** THIS WEEK'S PROGRAM *******\n\n"
     text+="Clubroom reservations:\n=#=#=#=#=#=#=#=#=\n"
