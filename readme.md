@@ -14,3 +14,7 @@ parser.py
 
 generator.py
     Generates the actual mail based on the lists of events provided by parser
+
+
+
+In addition, this repo has a separate script for calculating the different events of any given year. The eventcalculator script is modified from the mail generator.
