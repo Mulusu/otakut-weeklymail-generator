@@ -1,20 +1,6 @@
 The purpose of this project is to make writing otakut weeklymails easier.
 The program is written in python3, because it is the most usable language I know for this kind of work, as it mostly parses strings.
 
-This program was written under the influence of more or less alcohol, which may or may not be visible in the quality of the code.
+The mailgenerator script downloads the google calendar data and parses from it all events that are on the current week. It then separates clubroom reservations from the club's events. Finally, it outputs the list of reservations and events in the format of the weeklymail. The output can be as a webcompatible output intended for using the code on a webserver, or as a plaintext. This is controlled by a single variable at the beginning of the code.
 
-
-Program structure:
-
-main.py
-    Downloads the calendar info from google and calls the other classes. Deletes fetched file in the end
-
-parser.py
-    Parses the calendar file to form sensible events and reservations as a list
-
-generator.py
-    Generates the actual mail based on the lists of events provided by parser
-
-
-
-In addition, this repo has a separate script for calculating the different events of any given year. The eventcalculator script is modified from the mail generator.
+In addition, this repo has a separate script for calculating the different events of any given year. The eventcalculator script is modified from the mail generator, and as a result might have some redundant code remaining from the mail generator. The use of the eventcalculator is to count the events of usually the last year for annual documents of the club.
